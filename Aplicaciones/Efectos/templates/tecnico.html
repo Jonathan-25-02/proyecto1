@@ -1,74 +1,47 @@
 {% extends './plantilla.html' %}
 {% block contenido %}
 <br>
-<h1></h1>
-<h1>Listado de actividades</h1>
-<a href="/nuevoCiclismo" class="btn btn-primary">Agregar actividad</a>
+<h1>Listado de Técnicos</h1>
+<a href="/nuevoTecnico" class="btn btn-primary">Agregar técnico</a>
 
-    Agregar Ciclismo
-</a>
-
-<table class="table table-borde
-    table-striped table-hover" >
+<table class="table table-bordered table-striped table-hover">
     <thead>
         <tr>
             <th>ID</th>
-            <th>MODELO</th>
-            <th>FABRICANTE</th>
-            <th>MATERIAL</th>
-            <th>PESO</th>
-            <th>CARACTERISITICAS ADICIONALES</th>
-            <th>ESTANDARES DE SEGURIDAD</th>
+            <th>Empleado</th>
+            <th>Especialidad</th>
+            <th>Acciones</th>
         </tr>
     </thead>
     <tbody>
         <script>
-            //Swal.fire("SweetAlert2 is working!");
-            function eliminarCiclismo(id){
+            function eliminarTecnico(id){
                 Swal.fire({
-                    title: "CONFIRMACION",
-                    text: "¿ ESTAS SEGURO DE ELIMINAR EL CARGO DE FORMA PERMANENTE",
+                    title: "CONFIRMACIÓN",
+                    text: "¿Eliminar técnico?",
                     icon: "warning",
                     showCancelButton: true,
                     confirmButtonColor: "#3085d6",
                     cancelButtonColor: "#d33",
-                    confirmButtonText: "Si, Deseo Eliminar!"
-                    }).then((result) => {
+                    confirmButtonText: "Sí, eliminar"
+                }).then((result) => {
                     if (result.isConfirmed) {
-                        window.location.href="/eliminarCiclismo/"+id
+                        window.location.href="/eliminarTecnico/"+id
                     }
-                });
-
+                });com
             }
-                    
         </script>
-        {% for cargoTemporal in cargos %}
+        {% for tecnico in tecnicos %}
         <tr>
-            <td>{{ cargoTemporal.id }}</td>
-            <td>{{ cargoTemporal.modelo }}</td>
-            <td>{{ cargoTemporal.fabricante }}</td>
-            <td>{{ cargoTemporal.material }}</td>
-            <td>{{ cargoTemporal.peso }}</td>
-            <td>{{ cargoTemporal.caracteristicas }}</td>
-            <td>{{ cargoTemporal.estandares }}</td>
+            <td>{{ tecnico.id }}</td>
+            <td>{{ tecnico.empleado.nombre }} {{ tecnico.empleado.apellido }}</td>
+            <td>{{ tecnico.especialidad }}</td>
             <td>
-                <a href="editarCiclismo/{{cargoTemporal.id}}" class="btn btn-outline-warning">
-                    <i class ="fa fa-pen"> </i>
-                </a>
-                <a href="#"
-                onclick = "eliminarCiclismo('{{cargoTemporal.id }}');"
-
-                class="btn btn-outline-danger">
-                    <i class ="fa fa-trash"> </i>
-                </a>
+                <a href="/editarTecnico/{{tecnico.empleado.id}}" class="btn btn-outline-warning"><i class="fa fa-pen"></i></a>
+                <a href="#" onclick="eliminarTecnico('{{tecnico.empleado.id}}');" class="btn btn-outline-danger"><i class="fa fa-trash"></i></a>
             </td>
         </tr>
- 
         {% endfor %}
     </tbody>
 </table>
-
 {% endblock %}
-
-<br><br><br><br><br><br> 
-
