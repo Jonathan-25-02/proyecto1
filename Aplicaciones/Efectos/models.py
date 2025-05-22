@@ -41,15 +41,16 @@ class Creacion(models.Model):
     def __str__(self):
         return f"Creación {self.id} - {self.descripcion[:30]}"
 
-class  Casco(models.Model):
-    id=models.AutoField(primary_key=True)
-    modelo=models.CharField(max_length=100)
-    fabricante=models.CharField(max_length=210)
-    material=models.CharField(max_length=100)
-    peso=models.CharField(max_length=210)
-    caracteristicas=models.CharField(max_length=210)
-    estandares=models.CharField(max_length=210)
+
+class Casco(models.Model):
+    id = models.AutoField(primary_key=True)
+    modelo = models.CharField(max_length=100)
+    fabricante = models.CharField(max_length=210)
+    material = models.CharField(max_length=100)
+    peso = models.FloatField()  # Cambiado a FloatField porque representa un valor numérico
+    caracteristicas = models.CharField(max_length=210)
+    estandares = models.CharField(max_length=210)
 
     def __str__(self):
-        fila= "{0}: {1} {2} {3} {4} {5} {6}"
-        return fila.format(self.id,self.modelo,self.fabricante,self.material,self.peso, self.caracteristicas, self.estandares)
+        fila = "{0}: {1} {2} {3} {4} {5} {6}"
+        return fila.format(self.id, self.modelo, self.fabricante, self.material, self.peso, self.caracteristicas, self.estandares)
