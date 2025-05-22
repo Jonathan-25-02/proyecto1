@@ -1,0 +1,36 @@
+{% extends './plantilla.html' %}
+{% block contenido %}
+<div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6 bg-light">
+        <h1>Nueva Creación</h1>
+        <form action="/guardarCreacion" method="post">
+            {% csrf_token %}
+            <label>Descripción:</label>
+            <input class="form-control" type="text" name="descripcion"><br>
+
+            <label>Fecha de Creación:</label>
+            <input class="form-control" type="date" name="fecha_creacion"><br>
+
+            <label>Técnico:</label>
+            <select class="form-control" name="tecnico_id">
+                {% for tecnico in tecnicos %}
+                    <option value="{{ tecnico.empleado.id }}">{{ tecnico.empleado.nombre }} {{ tecnico.empleado.apellido }}</option>
+                {% endfor %}
+            </select><br>
+
+            <label>Productora:</label>
+            <select class="form-control" name="productora_id">
+                {% for productora in productoras %}
+                    <option value="{{ productora.id }}">{{ productora.nombre }}</option>
+                {% endfor %}
+            </select><br>
+
+            <button class="btn btn-success" type="submit">Guardar</button>
+            <br>
+            <a class="btn btn-outline-danger" href="/creacion">Cancelar</a>
+        </form>
+    </div>
+    <div class="col-md-3"></div>
+</div>
+{% endblock %}
