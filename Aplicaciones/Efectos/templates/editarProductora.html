@@ -1,0 +1,21 @@
+{% extends './plantilla.html' %} 
+{% block contenido %}
+<div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6 bg-light">
+        <h1>Editar Productora</h1>
+        <form action="/procesarEdicionProductora/{{ productoraEditar.id }}" method="post">
+            {% csrf_token %}
+            <label>Nombre:</label>
+            <input class="form-control" type="text" name="nombre" value="{{ productoraEditar.nombre }}">
+
+            <label>País:</label>
+            <input class="form-control" type="text" name="pais" value="{{ productoraEditar.pais }}">
+
+            <button class="btn btn-warning mt-3" type="submit">Editar</button>
+            <a class="btn btn-outline-danger mt-3" href="/productora">Cancelar</a>
+        </form>
+    </div>
+    <div class="col-md-3"></div>
+</div>
+{% endblock %}
