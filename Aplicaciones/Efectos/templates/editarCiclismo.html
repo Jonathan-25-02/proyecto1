@@ -1,0 +1,50 @@
+{% extends './plantilla.html' %}
+{% block contenido %}
+    <div class="row ">
+        <div class="col-md-3 "> </div>
+        <div class="col-md-6 bg-light"> 
+            <h1>Actualizar Casco de Ciclismo</h1>
+
+            <form action="/procesarEdicionCiclismo/{{ cargoCiclismo.id }}" method="post">
+                {% csrf_token %}
+
+                
+                <label for="modelo">Modelo:</label><br>
+                <input class="form-control" type="text" name="modelo" id="modelo " value="{{cargoCiclismo.modelo}}"><br><br>
+
+                <label for="fabricante">Fabricante:</label><br>
+                <input class="form-control" type="text" name="fabricante" id="fabricante" value="{{cargoCiclismo.fabricante}}"><br><br>
+
+                <label for="material">Material:</label><br>
+                <input class="form-control" type="text" name="material" id="material" value="{{cargoCiclismo.material}}"><br><br>
+
+                <label for="peso">Peso:</label><br>
+                <input class="form-control" type="text" name="peso" id="peso" value="{{cargoCiclismo.peso}}"><br><br>
+
+                <label for="caracteristicas">Caracteristicas:</label><br>
+                <input class="form-control" type="text" name="caracteristicas" id="caracteristicas" value="{{cargoCiclismo.caracteristicas}}"><br><br>
+
+                <label for="estandares">Estandares:</label><br>
+                <input class="form-control" type="text" name="estandares" id="estandares" value="{{cargoCiclismo.estandares}}"><br><br>
+
+                <button class="btn btn-warning" type="submit">
+                    <i class="fa fa-pen"></i>
+                    Editar</button>
+                <br>
+                <a class="btn btn-outline-danger" href="/">
+                    <i class="fa fa-times"></i>
+                    Cancelar</a>
+            </form>
+            
+
+
+        </div>
+        <div class="col-md-3 "> </div>
+       
+     
+    </div>
+{% endblock %}
+
+
+
+

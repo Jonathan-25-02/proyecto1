@@ -1,0 +1,44 @@
+{% extends './plantilla.html' %}
+{% block contenido %}
+    <div class="row ">
+        <div class="col-md-3 "> </div>
+        <div class="col-md-6 bg-light"> 
+            <h1>Nuevo Ciclismo</h1>
+
+            <form action="/guardarCiclismo" method="post">
+                {% csrf_token %}
+                
+                <label for="modelo">Modelo:</label><br>
+                <input class="form-control" type="text" name="modelo" id="modelo"><br><br>
+
+                <label for="fabricante">Fabricante:</label><br>
+                <input class="form-control" type="text" name="fabricante" id="fabricante"><br><br>
+
+                <label for="material">Material:</label><br>
+                <input class="form-control" type="text" name="material" id="material"><br><br>
+
+                <label for="peso">Peso:</label><br>
+                <input class="form-control" type="text" name="peso" id="peso"><br><br>
+
+                <label for="caracteristicas">Caracteristicas:</label><br>
+                <input class="form-control" type="text" name="caracteristicas" id="caracteristicas"><br><br>
+
+                <label for="estandares">Estandares:</label><br>
+                <input class="form-control" type="text" name="estandares" id="estandares"><br><br>
+
+                <button class="btn btn-success" type="submit">Guardar</button>
+                <br>
+                <a class="btn btn-outline-danger" href="/">Cancelar</a>
+            </form>
+            
+
+
+        </div>
+        <div class="col-md-3 "> </div>
+       
+     
+    </div>
+{% endblock %}
+
+
+

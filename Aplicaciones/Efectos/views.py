@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
-from .models import  Empleado, Tecnico, Productora, Creacion
+from .models import  Empleado, Tecnico, Productora, Creacion, Casco
 
 
 # ====================
@@ -154,3 +154,61 @@ def procesarEdicionCreacion(request, id):
 def eliminarCreacion(request, id):
     Creacion.objects.get(id=id).delete()
     return redirect('/creacion')
+
+
+
+#casco de ciclismo
+def ciclismo(request):
+    creaciones = Casco.objects.all()
+    return render(request, "ciclismo.html", {'cargos': creaciones})
+
+
+def nuevoCiclismo (request):
+    return render (request, "nuevoCiclismo.html")
+
+#almacenando los datos de cargo en la bdd
+def guardarCiclismo(request):
+    modelo=request.POST["modelo"]
+    fabricante=request.POST["fabricante"]
+    material=request.POST["material"]
+    peso=request.POST["peso"]
+    caracteristicas=request.POST["caracteristicas"]
+    estandares=request.POST["estandares"]
+    nuevoCargo=Casco.objects.create(modelo=modelo, fabricante=fabricante, material=material, peso=peso, caracteristicas=caracteristicas, estandares=estandares )
+    #Menaje de confirmacion
+    messages.success(request,"Casco guardado Existosamente")
+    return redirect('/ciclismo')
+
+
+def eliminarCiclismo(request,id):
+    cargoEliminar=Casco.objects.get(id=id)
+    cargoEliminar.delete ()
+    
+    return redirect('/ciclismo')
+
+
+def editarCiclismo(request,id):
+    cargoCiclismo=Casco.objects.get(id=id)
+    return render(request,"editarCiclismo.html", {'cargoCiclismo':cargoCiclismo})
+
+
+#CTUALIZANDO CARGOS 
+def procesarEdicionCiclismo(request,id):
+   
+    modelo=request.POST["modelo"]
+    fabricante=request.POST["fabricante"]
+    material=request.POST["material"]
+    peso=request.POST["peso"]
+    caracteristicas=request.POST["caracteristicas"]
+    estandares=request.POST["estandares"]
+    cargo=Casco.objects.get(id=id)#buscando el cargo a editar por ID
+    cargo.modelo=modelo
+    cargo.fabricante=fabricante
+    cargo.material=material
+    cargo.peso=peso
+    cargo.caracteristicas=caracteristicas
+    cargo.estandares=estandares
+    cargo.save()
+    #mensaje de confirmacion
+    messages.success(request,"Ciclismo actualizado Existosamente")
+    return redirect('/ciclismo')

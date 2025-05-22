@@ -37,4 +37,13 @@ urlpatterns = [
     path('eliminarCreacion/<id>', views.eliminarCreacion),
     path('editarCreacion/<id>', views.editarCreacion),
     path('procesarEdicionCreacion/<id>', views.procesarEdicionCreacion),
+
+
+       # ciclismo
+    path('ciclismo', views.ciclismo),
+    path('nuevoCiclismo', views.nuevoCiclismo),
+    path('guardarCiclismo', views.guardarCiclismo),
+    path('eliminarCiclismo/<id>', views.eliminarCiclismo),
+    path('editarCiclismo/<id>', views.editarCiclismo),
+    path('procesarEdicionCiclismo/<id>', views.procesarEdicionCiclismo),
 ]
