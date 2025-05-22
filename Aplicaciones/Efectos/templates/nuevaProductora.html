@@ -1,0 +1,22 @@
+{% extends './plantilla.html' %}
+{% block contenido %}
+<div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6 bg-light">
+        <h1>Nueva Productora</h1>
+        <form action="/guardarProductora" method="post">
+            {% csrf_token %}
+            <label>Nombre:</label>
+            <input class="form-control" type="text" name="nombre"><br>
+
+            <label>País:</label>
+            <input class="form-control" type="text" name="pais"><br>
+
+            <button class="btn btn-success" type="submit">Guardar</button>
+            <br>
+            <a class="btn btn-outline-danger" href="/productora">Cancelar</a>
+        </form>
+    </div>
+    <div class="col-md-3"></div>
+</div>
+{% endblock %}
