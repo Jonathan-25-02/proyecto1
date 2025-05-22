@@ -1,42 +1,51 @@
-from django.db import models
+{% extends './plantilla.html' %}
+{% block contenido %}
+<br>
+<h1>Listado de Creaciones</h1>
+<a href="/nuevaCreacion" class="btn btn-primary">Agregar creación</a>
 
-# Create your models here.
-from django.db import models
-
-# Empleado general
-class Empleado(models.Model):
-    id = models.AutoField(primary_key=True)
-    nombre = models.CharField(max_length=100)
-    apellido = models.CharField(max_length=100)
-    fecha_ingreso = models.DateField()
-
-    def __str__(self):
-        return f"{self.nombre} {self.apellido}"
-
-# Técnico de efectos especiales (subtipo de Empleado)
-class Tecnico(models.Model):
-    empleado = models.OneToOneField(Empleado, on_delete=models.CASCADE, primary_key=True)
-    especialidad = models.CharField(max_length=100)
-
-    def __str__(self):
-        return f"Técnico: {self.empleado.nombre} {self.empleado.apellido} - {self.especialidad}"
-
-# Productora de cine
-class Productora(models.Model):
-    id = models.AutoField(primary_key=True)
-    nombre = models.CharField(max_length=150)
-    pais = models.CharField(max_length=100)
-
-    def __str__(self):
-        return self.nombre
-
-# Creación (Elemento de atrezzo con efectos)
-class Creacion(models.Model):
-    id = models.AutoField(primary_key=True)
-    descripcion = models.TextField()
-    fecha_creacion = models.DateField()
-    tecnico = models.ForeignKey(Tecnico, on_delete=models.CASCADE)
-    productora = models.ForeignKey(Productora, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return f"Creación {self.id} - {self.descripcion[:30]}"
+<table class="table table-bordered table-striped table-hover">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Descripción</th>
+            <th>Fecha</th>
+            <th>Técnico</th>
+            <th>Productora</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        <script>
+            function eliminarCreacion(id){
+                Swal.fire({
+                    title: "CONFIRMACIÓN",
+                    text: "¿Eliminar creación?",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Sí, eliminar"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href="/eliminarCreacion/"+id
+                    }
+                });
+            }
+        </script>
+        {% for creacion in creaciones %}
+        <tr>
+            <td>{{ creacion.id }}</td>
+            <td>{{ creacion.descripcion }}</td>
+            <td>{{ creacion.fecha_creacion }}</td>
+            <td>{{ creacion.tecnico.empleado.nombre }} {{ creacion.tecnico.empleado.apellido }}</td>
+            <td>{{ creacion.productora.nombre }}</td>
+            <td>
+                <a href="/editarCreacion/{{creacion.id}}" class="btn btn-outline-warning"><i class="fa fa-pen"></i></a>
+                <a href="#" onclick="eliminarCreacion('{{creacion.id}}');" class="btn btn-outline-danger"><i class="fa fa-trash"></i></a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
